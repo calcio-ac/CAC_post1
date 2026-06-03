@@ -79,14 +79,24 @@
       </select>
     </div>
     <div>
-      <label>DANGER THRESHOLD &nbsp;</label>
+      <label>DANGER THRESHOLD (TOP) &nbsp;</label>
       <input id="thr" type="range" min="1" max="8" step="0.1" value="3.5" />
       <span class="threshVal" id="thrVal">3.5%</span>
+    </div>
+    <div>
+      <label>REST FLOOR (BOTTOM) &nbsp;</label>
+      <input id="floor" type="range" min="0" max="3" step="0.1" value="1.8" />
+      <span class="threshVal" id="floorVal" style="background:var(--teamA)">1.8%</span>
     </div>
     <div>
       <label>SHOW 2026 &nbsp;</label>
       <input id="show26" type="checkbox" checked />
     </div>
+  </div>
+
+  <div class="panel" id="kmPanel">
+    <h2>&gt; THRESHOLD IN ABSOLUTE KM (PER TOURNAMENT)</h2>
+    <div id="kmGrid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; font-size:12px;"></div>
   </div>
 
   <div class="panel">
@@ -140,7 +150,14 @@ function bindUI() {
     document.getElementById('thrVal').textContent = (+thr.value).toFixed(1) + '%';
     render();
   });
+  const fl = document.getElementById('floor');
+  fl.addEventListener('input', () => {
+    document.getElementById('floorVal').textContent = (+fl.value).toFixed(1) + '%';
+    render();
+  });
 }
+
+function fmtKm(n){ return Math.round(n).toLocaleString() + ' km'; }
 
 function filterHist(year) {
   return year === 'All' ? DATA.historical : DATA.historical.filter(r => r.Year === year);
@@ -149,36 +166,52 @@ function filterHist(year) {
 function render() {
   const year = document.getElementById('yearSel').value;
   const thr  = parseFloat(document.getElementById('thr').value);
+  const floor= parseFloat(document.getElementById('floor').value);
   const show26 = document.getElementById('show26').checked;
   document.getElementById('thrVal').textContent = thr.toFixed(1) + '%';
+  document.getElementById('floorVal').textContent = floor.toFixed(1) + '%';
 
   const hist = filterHist(year);
+  const semi = ['1st Place','2nd Place','3rd Place','4th Place'];
 
   // ---- KPI calc ----
   const above = hist.filter(r => r.Pct > thr);
   const aboveGS = above.filter(r => r['Final Position'] === 'Group Stage');
-  const below = hist.filter(r => r.Pct < thr);
-  const deep = ['1st Place','2nd Place','3rd Place','4th Place','Quarter-finals'];
-  const belowDeep = below.filter(r => deep.includes(r['Final Position']));
+  const belowFloor = hist.filter(r => r.Pct < floor);
+  const belowFloorSemi = belowFloor.filter(r => semi.includes(r['Final Position']));
 
   const gsAvg = avg(hist.filter(r => r['Final Position']==='Group Stage').map(r=>r.Pct));
-  const sfAvg = avg(hist.filter(r => ['1st Place','2nd Place','3rd Place','4th Place'].includes(r['Final Position'])).map(r=>r.Pct));
+  const sfAvg = avg(hist.filter(r => semi.includes(r['Final Position'])).map(r=>r.Pct));
 
   const kpis = [
     {n: above.length ? Math.round(aboveGS.length/above.length*100)+'%' : '—',
      l: `OF TEAMS > ${thr.toFixed(1)}% EXIT GROUP STAGE`},
+    {n: belowFloor.length ? `${belowFloorSemi.length}/${belowFloor.length}` : '0/0',
+     l: `TEAMS < ${floor.toFixed(1)}% REACHED SEMI+`},
     {n: gsAvg.toFixed(2)+'%', l:'AVG TRAVEL // GROUP EXITS'},
-    {n: sfAvg.toFixed(2)+'%', l:'AVG TRAVEL // SEMI-FINALISTS'},
-    {n: DATA.wc2026.filter(r => r.Pct > thr).length, l:`2026 TEAMS > ${thr.toFixed(1)}%`}
+    {n: sfAvg.toFixed(2)+'%', l:'AVG TRAVEL // SEMI-FINALISTS'}
   ];
   document.getElementById('kpis').innerHTML = kpis.map(k =>
     `<div class="stat"><div class="n">${k.n}</div><div class="l">${k.l}</div></div>`).join('');
 
+  // ---- KM equivalents per tournament ----
+  const kmRows = [];
+  for (const y of ['2014','2018','2022']) {
+    const tot = DATA.totals[y];
+    kmRows.push(`<div class="stat" style="background:var(--white)"><div class="l">${y} TOTAL</div><div style="font-weight:bold">${fmtKm(tot)}</div><div style="margin-top:4px"><span class="danger">${thr.toFixed(1)}% = ${fmtKm(tot*thr/100)}</span><br><span style="color:var(--teamA);font-weight:bold">${floor.toFixed(1)}% = ${fmtKm(tot*floor/100)}</span></div></div>`);
+  }
+  const t26 = DATA.total2026;
+  kmRows.push(`<div class="stat" style="background:var(--box)"><div class="l">2026 TOTAL</div><div style="font-weight:bold">${fmtKm(t26)}</div><div style="margin-top:4px"><span class="danger">${thr.toFixed(1)}% = ${fmtKm(t26*thr/100)}</span><br><span style="color:var(--teamA);font-weight:bold">${floor.toFixed(1)}% = ${fmtKm(t26*floor/100)}</span></div></div>`);
+  document.getElementById('kmGrid').innerHTML = kmRows.join('');
+
   // ---- Headline sentence ----
-  const head = above.length
-    ? `Of teams that carried more than <b>${thr.toFixed(1)}%</b> of their tournament's total group-stage travel, <b>${Math.round(aboveGS.length/above.length*100)}%</b> crashed out in the group stage (${aboveGS.length}/${above.length} teams across ${year==='All'?'2014–2022':year}).`
+  const part1 = above.length
+    ? `Above <b>${thr.toFixed(1)}%</b> → <b>${Math.round(aboveGS.length/above.length*100)}%</b> crash out in the group stage (${aboveGS.length}/${above.length}).`
     : `No historical teams above ${thr.toFixed(1)}% in this filter.`;
-  document.getElementById('headline').innerHTML = head;
+  const part2 = belowFloor.length
+    ? ` Below <b>${floor.toFixed(1)}%</b> → only <b>${belowFloorSemi.length}/${belowFloor.length}</b> have reached the semi-finals.`
+    : ` No historical teams below ${floor.toFixed(1)}%.`;
+  document.getElementById('headline').innerHTML = part1 + part2;
 
   // ---- Scatter ----
   const traceHist = {
@@ -192,8 +225,8 @@ function render() {
       color: hist.map(r => r.Pct > thr ? COL.teamB : COL.teamA),
       line: { color: COL.black, width: 2 }
     },
-    customdata: hist.map(r => [r.Team, r.Year, r['Final Position'], r.Pct.toFixed(2)+'%']),
-    hovertemplate: '<b>%{customdata[0]}</b> (%{customdata[1]})<br>Travel: %{customdata[3]}<br>Result: %{customdata[2]}<extra></extra>'
+    customdata: hist.map(r => [r.Team, r.Year, r['Final Position'], r.Pct.toFixed(2)+'%', fmtKm(r.Km)]),
+    hovertemplate: '<b>%{customdata[0]}</b> (%{customdata[1]})<br>Travel: %{customdata[3]} (%{customdata[4]})<br>Result: %{customdata[2]}<extra></extra>'
   };
 
   const traces = [traceHist];
@@ -212,8 +245,8 @@ function render() {
         color: d26.map(r => r.Pct > thr ? COL.teamB : COL.box),
         line: { color: COL.black, width: 2 }
       },
-      customdata: d26.map(r => [r.Team, r.Group, r.Pct.toFixed(2)+'%']),
-      hovertemplate: '<b>%{customdata[0]}</b> (Group %{customdata[1]})<br>2026 Travel: %{customdata[2]}<extra></extra>'
+      customdata: d26.map(r => [r.Team, r.Group, r.Pct.toFixed(2)+'%', fmtKm(r.Km)]),
+      hovertemplate: '<b>%{customdata[0]}</b> (Group %{customdata[1]})<br>2026 Travel: %{customdata[2]} (%{customdata[3]})<extra></extra>'
     });
   }
 
@@ -235,15 +268,20 @@ function render() {
       autorange: 'reversed',
       gridcolor: '#eee'
     },
-    shapes: [{
-      type:'line', x0: thr, x1: thr, y0: 0.5, y1: 27,
-      line: { color: COL.teamB, width: 2, dash: 'dash' }
-    }],
-    annotations: [{
-      x: thr, y: 1, xanchor:'left', yanchor:'top',
-      text: `  ${thr.toFixed(1)}% THRESHOLD`,
-      showarrow: false, font: { color: COL.teamB, family: FONT, size: 11 }
-    }]
+    shapes: [
+      { type:'line', x0: thr, x1: thr, y0: 0.5, y1: 27,
+        line: { color: COL.teamB, width: 2, dash: 'dash' } },
+      { type:'line', x0: floor, x1: floor, y0: 0.5, y1: 27,
+        line: { color: COL.teamA, width: 2, dash: 'dot' } }
+    ],
+    annotations: [
+      { x: thr, y: 1, xanchor:'left', yanchor:'top',
+        text: `  ${thr.toFixed(1)}% DANGER`,
+        showarrow: false, font: { color: COL.teamB, family: FONT, size: 11 } },
+      { x: floor, y: 1, xanchor:'right', yanchor:'top',
+        text: `${floor.toFixed(1)}% FLOOR  `,
+        showarrow: false, font: { color: COL.teamA, family: FONT, size: 11 } }
+    ]
   };
 
   Plotly.newPlot('chart', traces, layout, {displayModeBar:false, responsive:true});
