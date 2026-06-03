@@ -130,6 +130,15 @@
   </div>
 
   <div class="panel">
+    <h2>&gt; SWEET SPOT // TEAMS BETWEEN FLOOR & DANGER THAT REACHED SEMI-FINALS</h2>
+    <p id="sweetCap" style="font-size:12px; margin:0 0 8px;"></p>
+    <table id="sweetTbl">
+      <thead><tr><th>Team</th><th>Year</th><th>Travel %</th><th>Travel km</th><th>Final Position</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="panel">
     <h2>&gt; HEADLINE STAT</h2>
     <p id="headline" style="font-size:15px; margin:0;"></p>
   </div>
@@ -299,6 +308,19 @@ function render() {
   };
 
   Plotly.newPlot('chart', traces, layout, {displayModeBar:false, responsive:true});
+
+  // ---- Sweet spot table ----
+  const sweet = hist.filter(r => r.Pct >= floor && r.Pct <= thr && semi.includes(r['Final Position']))
+                    .sort((a,b) => a.Pos - b.Pos || a.Pct - b.Pct);
+  const sweetTotal = hist.filter(r => r.Pct >= floor && r.Pct <= thr).length;
+  document.getElementById('sweetCap').innerHTML =
+    `Filter: <b>${floor.toFixed(1)}% ≤ travel ≤ ${thr.toFixed(1)}%</b> · ` +
+    `<b>${sweet.length}</b> of <b>${sweetTotal}</b> teams in this band reached the semi-finals` +
+    (sweetTotal ? ` (${Math.round(sweet.length/sweetTotal*100)}%).` : '.');
+  const sweetTb = document.querySelector('#sweetTbl tbody');
+  sweetTb.innerHTML = sweet.length
+    ? sweet.map(r => `<tr><td><b>${r.Team}</b></td><td>${r.Year}</td><td>${r.Pct.toFixed(2)}%</td><td>${fmtKm(r.Km)}</td><td class="safe">${r['Final Position']}</td></tr>`).join('')
+    : `<tr><td colspan="5">— no semi-finalists in this band —</td></tr>`;
 
   // ---- 2026 tables ----
   const safe = DATA.wc2026.filter(r => r.Pct < thr).sort((a,b)=>a.Pct-b.Pct);
