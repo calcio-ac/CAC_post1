@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CAC_PIPELINE // Travel Fatigue vs. Performance</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg" />
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <style>
   :root {
@@ -22,10 +23,18 @@
     font-family: 'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
-  header { border: 3px solid var(--black); padding: 16px 20px; background: var(--white); }
+  header { border: 3px solid var(--black); padding: 16px 20px; background: var(--white);
+           display:flex; gap:16px; align-items:center; }
+  header .brand { flex-shrink:0; display:flex; align-items:center; }
+  header .brand img { height: 48px; width:auto; display:block; }
+  header .meta { flex:1; min-width:0; }
   header h1 { margin: 0; font-size: 22px; letter-spacing: 1px; }
   header p  { margin: 6px 0 0; font-size: 13px; }
-  .tag { display:inline-block; background: var(--black); color: var(--bg); padding: 2px 8px; margin-right:6px; font-size: 11px; }
+  header a.brand:hover { opacity:.8; }
+  .tag { display:inline-block; background: var(--black); color: var(--bg); padding: 2px 8px; margin-right:6px; font-size: 11px; text-decoration:none; }
+  .tag.link { background: var(--teamA); }
+  .tag.link:hover { background: var(--black); }
+  footer a { color: var(--black); }
 
   .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
   .stat { background: var(--box); border: 3px solid var(--black); padding: 12px; }
@@ -61,9 +70,14 @@
 <div class="wrap">
 
   <header>
-    <span class="tag">CAC_PIPELINE</span><span class="tag">POST_01</span>
-    <h1>TRAVEL FATIGUE vs. FINAL POSITION // 2014 → 2026</h1>
-    <p>Does the team that flies more lose more? Interactive read of three World Cups + a preview of 2026.</p>
+    <a class="brand" href="https://calcioac.com" target="_blank" rel="noopener" aria-label="Calcio AC — calcioac.com">
+      <img src="logo.svg" alt="Calcio AC logo" />
+    </a>
+    <div class="meta">
+      <a class="tag link" href="https://calcioac.com" target="_blank" rel="noopener">CALCIOAC.COM</a><span class="tag">POST_01</span>
+      <h1>TRAVEL FATIGUE vs. FINAL POSITION // 2014 → 2026</h1>
+      <p>Does the team that flies more lose more? Interactive read of three World Cups + a preview of 2026.</p>
+    </div>
   </header>
 
   <div class="grid" id="kpis"></div>
@@ -120,7 +134,7 @@
     <p id="headline" style="font-size:15px; margin:0;"></p>
   </div>
 
-  <footer>CAC // calcio-ac // post 01 — data: FIFA group-stage travel distances</footer>
+  <footer><a href="https://calcioac.com" target="_blank" rel="noopener">CAC // calcioac.com</a> // post 01 — data: FIFA group-stage travel distances</footer>
 </div>
 
 <script>
