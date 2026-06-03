@@ -96,7 +96,9 @@
   .big-num {
     font-size: 360px; line-height: 0.9; font-weight: bold;
     letter-spacing: -6px;
+    white-space: nowrap;
   }
+  .big-num.small { font-size: 260px; letter-spacing: -4px; }
   .big-num.red { color: var(--teamB); }
   .big-num.blue { color: var(--teamA); }
   .big-num.green { color: var(--box); -webkit-text-stroke: 4px var(--black); }
@@ -120,22 +122,30 @@
 
   /* Slide 4 sweet-spot visual */
   .axis {
-    position: relative; height: 120px;
+    position: relative; height: 140px;
     background: var(--white); border: 4px solid var(--black);
-    margin: 20px 0;
+    margin: 80px 0 80px;
   }
   .axis .band {
     position: absolute; top: 0; bottom: 0;
     background: var(--box);
-    border-left: 4px solid var(--teamA);
-    border-right: 4px solid var(--teamB);
+    border-left: 6px solid var(--teamA);
+    border-right: 6px solid var(--teamB);
   }
   .axis .label {
-    position: absolute; top: -28px; font-size: 18px; font-weight: bold;
+    position: absolute;
+    font-size: 24px; font-weight: bold;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 4px 10px;
+    border: 3px solid var(--black);
   }
+  .axis .label.top { top: -56px; }
+  .axis .label.bot { bottom: -56px; }
   .axis .scale {
-    position:absolute; bottom: -32px; left: 0; right: 0;
-    display: flex; justify-content: space-between; font-size: 16px;
+    position:absolute; bottom: -90px; left: 0; right: 0;
+    display: flex; justify-content: space-between; font-size: 18px;
   }
 
   .center { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 24px; }
@@ -253,7 +263,7 @@ function render() {
   slides.push(slideShell(3, `
     <div class="center">
       <p class="tiny" style="font-size:24px;">Teams that traveled less than 1.8% of the tournament total</p>
-      <div class="big-num blue">${C.belowFloorSemi.length} / ${C.belowFloor.length}</div>
+      <div class="big-num blue small">${C.belowFloorSemi.length}&nbsp;/&nbsp;${C.belowFloor.length}</div>
       <h3>have ever reached the semi-finals.</h3>
       <div class="box blue" style="margin-top:20px;"><b style="font-size:30px;">"TOO RESTED" IS A THING TOO.</b></div>
     </div>
@@ -263,10 +273,10 @@ function render() {
   slides.push(slideShell(4, `
     <h2>THE SWEET SPOT</h2>
     <p>Every World Cup winner since 2014 sat between <b>1.8%</b> and <b>3.5%</b> of total tournament travel.</p>
-    <div class="axis" style="margin-top:60px;">
+    <div class="axis">
       <div class="band" style="left:22.5%; right:56.25%;"></div>
-      <div class="label" style="left:22%; color:var(--teamA);">1.8% FLOOR</div>
-      <div class="label" style="right:55%; color:var(--teamB);">3.5% DANGER</div>
+      <div class="label top" style="left:22.5%; color:var(--teamA);">1.8% FLOOR</div>
+      <div class="label bot" style="left:43.75%; color:var(--teamB);">3.5% DANGER</div>
       <div class="scale"><span>0%</span><span>2%</span><span>4%</span><span>6%</span><span>8%</span></div>
     </div>
     <div class="box" style="margin-top:80px;"><h3 style="margin:0;">NOT TOO TIRED. NOT TOO RESTED.</h3></div>
