@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CAC_PIPELINE // Travel Fatigue vs. Performance</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  :root {
+    --teamA: #0277B6;
+    --teamB: #D90429;
+    --box:   #09D69F;
+    --bg:    #FFD166;
+    --white: #FFFFFF;
+    --black: #000000;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'Courier New', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+  header { border: 3px solid var(--black); padding: 16px 20px; background: var(--white); }
+  header h1 { margin: 0; font-size: 22px; letter-spacing: 1px; }
+  header p  { margin: 6px 0 0; font-size: 13px; }
+  .tag { display:inline-block; background: var(--black); color: var(--bg); padding: 2px 8px; margin-right:6px; font-size: 11px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
+  .stat { background: var(--box); border: 3px solid var(--black); padding: 12px; }
+  .stat .n { font-size: 28px; font-weight: bold; }
+  .stat .l { font-size: 11px; text-transform: uppercase; }
+
+  .controls { display:flex; flex-wrap: wrap; gap: 14px; align-items:center;
+              margin-top: 18px; background: var(--white); border:3px solid var(--black); padding: 12px 16px; }
+  .controls label { font-size: 12px; text-transform: uppercase; }
+  .controls select, .controls input[type=range] { font-family: inherit; }
+  .controls select { border: 2px solid var(--black); background: var(--white); padding: 4px 8px; }
+  .threshVal { display:inline-block; min-width: 40px; text-align:center; background: var(--teamB); color: var(--white); padding: 2px 8px; }
+
+  .panel { background: var(--white); border: 3px solid var(--black); margin-top: 18px; padding: 12px; }
+  .panel h2 { margin: 0 0 8px; font-size: 14px; letter-spacing: 1px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th, td { border-bottom: 1px dashed var(--black); padding: 6px 4px; text-align: left; }
+  th { background: var(--black); color: var(--bg); }
+  .safe { color: #056b3a; font-weight:bold; }
+  .danger { color: var(--teamB); font-weight:bold; }
+
+  footer { font-size: 11px; text-align:center; margin: 24px 0 8px; opacity: .8; }
+
+  @media (max-width: 720px){
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="tag">CAC_PIPELINE</span><span class="tag">POST_01</span>
+    <h1>TRAVEL FATIGUE vs. FINAL POSITION // 2014 → 2026</h1>
+    <p>Does the team that flies more lose more? Interactive read of three World Cups + a preview of 2026.</p>
+  </header>
+
+  <div class="grid" id="kpis"></div>
+
+  <div class="controls">
+    <div>
+      <label>FILTER YEAR &nbsp;</label>
+      <select id="yearSel">
+        <option value="All">All Years</option>
+        <option value="2014">2014 Brazil</option>
+        <option value="2018">2018 Russia</option>
+        <option value="2022">2022 Qatar</option>
+      </select>
+    </div>
+    <div>
+      <label>DANGER THRESHOLD &nbsp;</label>
+      <input id="thr" type="range" min="1" max="8" step="0.1" value="3.5" />
+      <span class="threshVal" id="thrVal">3.5%</span>
+    </div>
+    <div>
+      <label>SHOW 2026 &nbsp;</label>
+      <input id="show26" type="checkbox" checked />
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>&gt; SCATTER // RELATIVE TOURNAMENT TRAVEL vs. FINAL POSITION</h2>
+    <div id="chart" style="width:100%; height:520px;"></div>
+  </div>
+
+  <div class="two-col">
+    <div class="panel">
+      <h2>&gt; 2026 // SAFE ZONE</h2>
+      <table id="safeTbl"><thead><tr><th>Team</th><th>Group</th><th>Travel %</th></tr></thead><tbody></tbody></table>
+    </div>
+    <div class="panel">
+      <h2>&gt; 2026 // DANGER ZONE</h2>
+      <table id="dangerTbl"><thead><tr><th>Team</th><th>Group</th><th>Travel %</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>&gt; HEADLINE STAT</h2>
+    <p id="headline" style="font-size:15px; margin:0;"></p>
+  </div>
+
+  <footer>CAC // calcio-ac // post 01 — data: FIFA group-stage travel distances</footer>
+</div>
+
+<script>
+const COL = {
+  teamA:'#0277B6', teamB:'#D90429', box:'#09D69F',
+  bg:'#FFD166', white:'#FFFFFF', black:'#000000'
+};
+const FONT = "'Courier New', monospace";
+
+const POS_TICKS = [1,2,3,4,6.5,12.5,24.5];
+const POS_LABELS= ['1ST','2ND','3RD','4TH','QF','R16','GROUP'];
+
+let DATA = null;
+
+async function load() {
+  const res = await fetch('../data/data.json');
+  DATA = await res.json();
+  bindUI();
+  render();
+}
+
+function bindUI() {
+  document.getElementById('yearSel').addEventListener('change', render);
+  document.getElementById('show26').addEventListener('change', render);
+  const thr = document.getElementById('thr');
+  thr.addEventListener('input', () => {
+    document.getElementById('thrVal').textContent = (+thr.value).toFixed(1) + '%';
+    render();
+  });
+}
+
+function filterHist(year) {
+  return year === 'All' ? DATA.historical : DATA.historical.filter(r => r.Year === year);
+}
+
+function render() {
+  const year = document.getElementById('yearSel').value;
+  const thr  = parseFloat(document.getElementById('thr').value);
+  const show26 = document.getElementById('show26').checked;
+  document.getElementById('thrVal').textContent = thr.toFixed(1) + '%';
+
+  const hist = filterHist(year);
+
+  // ---- KPI calc ----
+  const above = hist.filter(r => r.Pct > thr);
+  const aboveGS = above.filter(r => r['Final Position'] === 'Group Stage');
+  const below = hist.filter(r => r.Pct < thr);
+  const deep = ['1st Place','2nd Place','3rd Place','4th Place','Quarter-finals'];
+  const belowDeep = below.filter(r => deep.includes(r['Final Position']));
+
+  const gsAvg = avg(hist.filter(r => r['Final Position']==='Group Stage').map(r=>r.Pct));
+  const sfAvg = avg(hist.filter(r => ['1st Place','2nd Place','3rd Place','4th Place'].includes(r['Final Position'])).map(r=>r.Pct));
+
+  const kpis = [
+    {n: above.length ? Math.round(aboveGS.length/above.length*100)+'%' : '—',
+     l: `OF TEAMS > ${thr.toFixed(1)}% EXIT GROUP STAGE`},
+    {n: gsAvg.toFixed(2)+'%', l:'AVG TRAVEL // GROUP EXITS'},
+    {n: sfAvg.toFixed(2)+'%', l:'AVG TRAVEL // SEMI-FINALISTS'},
+    {n: DATA.wc2026.filter(r => r.Pct > thr).length, l:`2026 TEAMS > ${thr.toFixed(1)}%`}
+  ];
+  document.getElementById('kpis').innerHTML = kpis.map(k =>
+    `<div class="stat"><div class="n">${k.n}</div><div class="l">${k.l}</div></div>`).join('');
+
+  // ---- Headline sentence ----
+  const head = above.length
+    ? `Of teams that carried more than <b>${thr.toFixed(1)}%</b> of their tournament's total group-stage travel, <b>${Math.round(aboveGS.length/above.length*100)}%</b> crashed out in the group stage (${aboveGS.length}/${above.length} teams across ${year==='All'?'2014–2022':year}).`
+    : `No historical teams above ${thr.toFixed(1)}% in this filter.`;
+  document.getElementById('headline').innerHTML = head;
+
+  // ---- Scatter ----
+  const traceHist = {
+    x: hist.map(r => r.Pct),
+    y: hist.map(r => r.Pos),
+    mode: 'markers',
+    type: 'scatter',
+    name: 'Historical',
+    marker: {
+      size: 13,
+      color: hist.map(r => r.Pct > thr ? COL.teamB : COL.teamA),
+      line: { color: COL.black, width: 2 }
+    },
+    customdata: hist.map(r => [r.Team, r.Year, r['Final Position'], r.Pct.toFixed(2)+'%']),
+    hovertemplate: '<b>%{customdata[0]}</b> (%{customdata[1]})<br>Travel: %{customdata[3]}<br>Result: %{customdata[2]}<extra></extra>'
+  };
+
+  const traces = [traceHist];
+
+  if (show26) {
+    const d26 = DATA.wc2026;
+    traces.push({
+      x: d26.map(r => r.Pct),
+      y: d26.map(() => 24.5 + 1.6), // park 2026 just below group-stage line
+      mode: 'markers',
+      type: 'scatter',
+      name: '2026 (preview)',
+      marker: {
+        size: 12,
+        symbol: 'diamond',
+        color: d26.map(r => r.Pct > thr ? COL.teamB : COL.box),
+        line: { color: COL.black, width: 2 }
+      },
+      customdata: d26.map(r => [r.Team, r.Group, r.Pct.toFixed(2)+'%']),
+      hovertemplate: '<b>%{customdata[0]}</b> (Group %{customdata[1]})<br>2026 Travel: %{customdata[2]}<extra></extra>'
+    });
+  }
+
+  const layout = {
+    paper_bgcolor: COL.white,
+    plot_bgcolor: COL.white,
+    font: { family: FONT, color: COL.black, size: 12 },
+    margin: { l: 90, r: 30, t: 30, b: 60 },
+    showlegend: true,
+    legend: { orientation:'h', y:-0.18, x:0 },
+    xaxis: {
+      title: '> RELATIVE TOURNAMENT TRAVEL (%)',
+      gridcolor: '#eee', zeroline: false, ticksuffix: '%'
+    },
+    yaxis: {
+      title: '> FINAL POSITION',
+      tickvals: POS_TICKS.concat([26.1]),
+      ticktext: POS_LABELS.concat(['2026 PREVIEW']),
+      autorange: 'reversed',
+      gridcolor: '#eee'
+    },
+    shapes: [{
+      type:'line', x0: thr, x1: thr, y0: 0.5, y1: 27,
+      line: { color: COL.teamB, width: 2, dash: 'dash' }
+    }],
+    annotations: [{
+      x: thr, y: 1, xanchor:'left', yanchor:'top',
+      text: `  ${thr.toFixed(1)}% THRESHOLD`,
+      showarrow: false, font: { color: COL.teamB, family: FONT, size: 11 }
+    }]
+  };
+
+  Plotly.newPlot('chart', traces, layout, {displayModeBar:false, responsive:true});
+
+  // ---- 2026 tables ----
+  const safe = DATA.wc2026.filter(r => r.Pct < thr).sort((a,b)=>a.Pct-b.Pct);
+  const danger = DATA.wc2026.filter(r => r.Pct >= thr).sort((a,b)=>b.Pct-a.Pct);
+  fillTable('safeTbl', safe, 'safe');
+  fillTable('dangerTbl', danger, 'danger');
+}
+
+function fillTable(id, rows, cls) {
+  const tb = document.querySelector(`#${id} tbody`);
+  tb.innerHTML = rows.length
+    ? rows.map(r => `<tr><td>${r.Team}</td><td>${r.Group}</td><td class="${cls}">${r.Pct.toFixed(2)}%</td></tr>`).join('')
+    : `<tr><td colspan="3">— none —</td></tr>`;
+}
+
+function avg(a){ return a.length ? a.reduce((s,x)=>s+x,0)/a.length : 0; }
+
+load();
+</script>
+</body>
+</html>

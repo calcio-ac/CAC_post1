@@ -1,0 +1,1068 @@
+{
+  "historical": [
+    {
+      "Team": "USA",
+      "Year": "2014",
+      "Km": 5607,
+      "Final Position": "Round of 16",
+      "Pct": 6.146947903876513,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Croatia",
+      "Year": "2014",
+      "Km": 5531,
+      "Final Position": "Group Stage",
+      "Pct": 6.063629187861778,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Cameroon",
+      "Year": "2014",
+      "Km": 4704,
+      "Final Position": "Group Stage",
+      "Pct": 5.156990001754078,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Uruguay",
+      "Year": "2014",
+      "Km": 4697,
+      "Final Position": "Round of 16",
+      "Pct": 5.149315909489563,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Portugal",
+      "Year": "2014",
+      "Km": 4545,
+      "Final Position": "Group Stage",
+      "Pct": 4.9826784774600945,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Brazil",
+      "Year": "2014",
+      "Km": 4062,
+      "Final Position": "4th Place",
+      "Pct": 4.45316611120856,
+      "Pos": 4.0
+    },
+    {
+      "Team": "Switzerland",
+      "Year": "2014",
+      "Km": 3672,
+      "Final Position": "Round of 16",
+      "Pct": 4.025609542185581,
+      "Pos": 12.5
+    },
+    {
+      "Team": "France",
+      "Year": "2014",
+      "Km": 3518,
+      "Final Position": "Quarter-finals",
+      "Pct": 3.856779512366251,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Bosnia-Herzegovina",
+      "Year": "2014",
+      "Km": 3496,
+      "Final Position": "Group Stage",
+      "Pct": 3.832660936677776,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Ivory Coast",
+      "Year": "2014",
+      "Km": 3349,
+      "Final Position": "Group Stage",
+      "Pct": 3.6715049991229614,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Honduras",
+      "Year": "2014",
+      "Km": 3285,
+      "Final Position": "Group Stage",
+      "Pct": 3.601341869847395,
+      "Pos": 24.5
+    },
+    {
+      "Team": "England",
+      "Year": "2014",
+      "Km": 3184,
+      "Final Position": "Group Stage",
+      "Pct": 3.490615681459393,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Netherlands",
+      "Year": "2014",
+      "Km": 3159,
+      "Final Position": "3rd Place",
+      "Pct": 3.463208209086125,
+      "Pos": 3.0
+    },
+    {
+      "Team": "Italy",
+      "Year": "2014",
+      "Km": 3092,
+      "Final Position": "Group Stage",
+      "Pct": 3.389756183125767,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Nigeria",
+      "Year": "2014",
+      "Km": 2985,
+      "Final Position": "Round of 16",
+      "Pct": 3.272452201368181,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Japan",
+      "Year": "2014",
+      "Km": 2782,
+      "Final Position": "Group Stage",
+      "Pct": 3.049903525697246,
+      "Pos": 24.5
+    },
+    {
+      "Team": "South Korea",
+      "Year": "2014",
+      "Km": 2534,
+      "Final Position": "Group Stage",
+      "Pct": 2.778021399754429,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Costa Rica",
+      "Year": "2014",
+      "Km": 2272,
+      "Final Position": "Quarter-finals",
+      "Pct": 2.490791089282582,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Greece",
+      "Year": "2014",
+      "Km": 2269,
+      "Final Position": "Round of 16",
+      "Pct": 2.48750219259779,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Russia",
+      "Year": "2014",
+      "Km": 2254,
+      "Final Position": "Group Stage",
+      "Pct": 2.471057709173829,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Australia",
+      "Year": "2014",
+      "Km": 2228,
+      "Final Position": "Group Stage",
+      "Pct": 2.4425539379056307,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Ghana",
+      "Year": "2014",
+      "Km": 2125,
+      "Final Position": "Group Stage",
+      "Pct": 2.3296351517277674,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Chile",
+      "Year": "2014",
+      "Km": 1936,
+      "Final Position": "Round of 16",
+      "Pct": 2.122434660585862,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Algeria",
+      "Year": "2014",
+      "Km": 1890,
+      "Final Position": "Round of 16",
+      "Pct": 2.0720049114190493,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Spain",
+      "Year": "2014",
+      "Km": 1888,
+      "Final Position": "Group Stage",
+      "Pct": 2.069812313629188,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Iran",
+      "Year": "2014",
+      "Km": 1788,
+      "Final Position": "Group Stage",
+      "Pct": 1.9601824241361163,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Ecuador",
+      "Year": "2014",
+      "Km": 1759,
+      "Final Position": "Group Stage",
+      "Pct": 1.9283897561831256,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Argentina",
+      "Year": "2014",
+      "Km": 1683,
+      "Final Position": "2nd Place",
+      "Pct": 1.8450710401683914,
+      "Pos": 2.0
+    },
+    {
+      "Team": "Germany",
+      "Year": "2014",
+      "Km": 1659,
+      "Final Position": "1st Place",
+      "Pct": 1.8187598666900544,
+      "Pos": 1.0
+    },
+    {
+      "Team": "Colombia",
+      "Year": "2014",
+      "Km": 1500,
+      "Final Position": "Quarter-finals",
+      "Pct": 1.644448342396071,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Mexico",
+      "Year": "2014",
+      "Km": 1065,
+      "Final Position": "Round of 16",
+      "Pct": 1.1675583231012103,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Belgium",
+      "Year": "2014",
+      "Km": 698,
+      "Final Position": "Quarter-finals",
+      "Pct": 0.7652166286616383,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Poland",
+      "Year": "2018",
+      "Km": 11534,
+      "Final Position": "Group Stage",
+      "Pct": 4.267615847973123,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Egypt",
+      "Year": "2018",
+      "Km": 11300,
+      "Final Position": "Group Stage",
+      "Pct": 4.181035120695014,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Iran",
+      "Year": "2018",
+      "Km": 11124,
+      "Final Position": "Group Stage",
+      "Pct": 4.115914573682419,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Morocco",
+      "Year": "2018",
+      "Km": 9907,
+      "Final Position": "Group Stage",
+      "Pct": 3.665620791214646,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Saudi Arabia",
+      "Year": "2018",
+      "Km": 9727,
+      "Final Position": "Group Stage",
+      "Pct": 3.599020231769947,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Denmark",
+      "Year": "2018",
+      "Km": 9569,
+      "Final Position": "Round of 16",
+      "Pct": 3.540559740701822,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Uruguay",
+      "Year": "2018",
+      "Km": 9501,
+      "Final Position": "Quarter-finals",
+      "Pct": 3.515399529356047,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Sweden",
+      "Year": "2018",
+      "Km": 9500,
+      "Final Position": "Quarter-finals",
+      "Pct": 3.5150295262480205,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Panama",
+      "Year": "2018",
+      "Km": 9319,
+      "Final Position": "Group Stage",
+      "Pct": 3.4480589636952947,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Switzerland",
+      "Year": "2018",
+      "Km": 9227,
+      "Final Position": "Round of 16",
+      "Pct": 3.414018677756893,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Croatia",
+      "Year": "2018",
+      "Km": 9118,
+      "Final Position": "2nd Place",
+      "Pct": 3.373688338982048,
+      "Pos": 2.0
+    },
+    {
+      "Team": "South Korea",
+      "Year": "2018",
+      "Km": 8857,
+      "Final Position": "Group Stage",
+      "Pct": 3.2771175277872335,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Russia",
+      "Year": "2018",
+      "Km": 8548,
+      "Final Position": "Quarter-finals",
+      "Pct": 3.1627865674071662,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Mexico",
+      "Year": "2018",
+      "Km": 8417,
+      "Final Position": "Round of 16",
+      "Pct": 3.114316160255746,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Portugal",
+      "Year": "2018",
+      "Km": 8404,
+      "Final Position": "Round of 16",
+      "Pct": 3.1095061198514067,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Spain",
+      "Year": "2018",
+      "Km": 8404,
+      "Final Position": "Round of 16",
+      "Pct": 3.1095061198514067,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Japan",
+      "Year": "2018",
+      "Km": 8318,
+      "Final Position": "Round of 16",
+      "Pct": 3.0776858525611615,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Peru",
+      "Year": "2018",
+      "Km": 8060,
+      "Final Position": "Group Stage",
+      "Pct": 2.9822250506904258,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Australia",
+      "Year": "2018",
+      "Km": 8057,
+      "Final Position": "Group Stage",
+      "Pct": 2.981115041366347,
+      "Pos": 24.5
+    },
+    {
+      "Team": "France",
+      "Year": "2018",
+      "Km": 8051,
+      "Final Position": "1st Place",
+      "Pct": 2.9788950227181905,
+      "Pos": 1.0
+    },
+    {
+      "Team": "Belgium",
+      "Year": "2018",
+      "Km": 7939,
+      "Final Position": "3rd Place",
+      "Pct": 2.937454674619267,
+      "Pos": 3.0
+    },
+    {
+      "Team": "Iceland",
+      "Year": "2018",
+      "Km": 7912,
+      "Final Position": "Group Stage",
+      "Pct": 2.927464590702562,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Colombia",
+      "Year": "2018",
+      "Km": 7855,
+      "Final Position": "Round of 16",
+      "Pct": 2.9063744135450738,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Senegal",
+      "Year": "2018",
+      "Km": 7853,
+      "Final Position": "Group Stage",
+      "Pct": 2.9056344073290217,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Serbia",
+      "Year": "2018",
+      "Km": 7393,
+      "Final Position": "Group Stage",
+      "Pct": 2.735432977637012,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Brazil",
+      "Year": "2018",
+      "Km": 7236,
+      "Final Position": "Quarter-finals",
+      "Pct": 2.677342489676913,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Tunisia",
+      "Year": "2018",
+      "Km": 7029,
+      "Final Position": "Group Stage",
+      "Pct": 2.600751846315509,
+      "Pos": 24.5
+    },
+    {
+      "Team": "England",
+      "Year": "2018",
+      "Km": 6800,
+      "Final Position": "4th Place",
+      "Pct": 2.5160211345775307,
+      "Pos": 4.0
+    },
+    {
+      "Team": "Costa Rica",
+      "Year": "2018",
+      "Km": 6637,
+      "Final Position": "Group Stage",
+      "Pct": 2.455710627969275,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Germany",
+      "Year": "2018",
+      "Km": 6618,
+      "Final Position": "Group Stage",
+      "Pct": 2.448680568916779,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Nigeria",
+      "Year": "2018",
+      "Km": 6168,
+      "Final Position": "Group Stage",
+      "Pct": 2.2821791703050307,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Argentina",
+      "Year": "2018",
+      "Km": 5886,
+      "Final Position": "Round of 16",
+      "Pct": 2.1778382938416683,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Wales",
+      "Year": "2022",
+      "Km": 193,
+      "Final Position": "Group Stage",
+      "Pct": 5.007784120394396,
+      "Pos": 24.5
+    },
+    {
+      "Team": "USA",
+      "Year": "2022",
+      "Km": 191,
+      "Final Position": "Round of 16",
+      "Pct": 4.955889984431759,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Ghana",
+      "Year": "2022",
+      "Km": 188,
+      "Final Position": "Group Stage",
+      "Pct": 4.878048780487805,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Belgium",
+      "Year": "2022",
+      "Km": 183,
+      "Final Position": "Group Stage",
+      "Pct": 4.748313440581215,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Costa Rica",
+      "Year": "2022",
+      "Km": 170,
+      "Final Position": "Group Stage",
+      "Pct": 4.411001556824079,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Poland",
+      "Year": "2022",
+      "Km": 165,
+      "Final Position": "Round of 16",
+      "Pct": 4.281266216917488,
+      "Pos": 12.5
+    },
+    {
+      "Team": "England",
+      "Year": "2022",
+      "Km": 163,
+      "Final Position": "Quarter-finals",
+      "Pct": 4.229372080954851,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Tunisia",
+      "Year": "2022",
+      "Km": 154,
+      "Final Position": "Group Stage",
+      "Pct": 3.995848469122989,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Serbia",
+      "Year": "2022",
+      "Km": 148,
+      "Final Position": "Group Stage",
+      "Pct": 3.8401660612350805,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Uruguay",
+      "Year": "2022",
+      "Km": 147,
+      "Final Position": "Group Stage",
+      "Pct": 3.8142189932537622,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Germany",
+      "Year": "2022",
+      "Km": 141,
+      "Final Position": "Group Stage",
+      "Pct": 3.6585365853658534,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Ecuador",
+      "Year": "2022",
+      "Km": 140,
+      "Final Position": "Group Stage",
+      "Pct": 3.632589517384536,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Portugal",
+      "Year": "2022",
+      "Km": 130,
+      "Final Position": "Quarter-finals",
+      "Pct": 3.3731188375713548,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Cameroon",
+      "Year": "2022",
+      "Km": 124,
+      "Final Position": "Group Stage",
+      "Pct": 3.2174364296834455,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Saudi Arabia",
+      "Year": "2022",
+      "Km": 113,
+      "Final Position": "Group Stage",
+      "Pct": 2.9320186818889464,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Argentina",
+      "Year": "2022",
+      "Km": 113,
+      "Final Position": "1st Place",
+      "Pct": 2.9320186818889464,
+      "Pos": 1.0
+    },
+    {
+      "Team": "Morocco",
+      "Year": "2022",
+      "Km": 112,
+      "Final Position": "4th Place",
+      "Pct": 2.9060716139076286,
+      "Pos": 4.0
+    },
+    {
+      "Team": "Qatar",
+      "Year": "2022",
+      "Km": 109,
+      "Final Position": "Group Stage",
+      "Pct": 2.828230409963674,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Denmark",
+      "Year": "2022",
+      "Km": 107,
+      "Final Position": "Group Stage",
+      "Pct": 2.776336274001038,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Switzerland",
+      "Year": "2022",
+      "Km": 104,
+      "Final Position": "Round of 16",
+      "Pct": 2.6984950700570836,
+      "Pos": 12.5
+    },
+    {
+      "Team": "France",
+      "Year": "2022",
+      "Km": 103,
+      "Final Position": "2nd Place",
+      "Pct": 2.6725480020757657,
+      "Pos": 2.0
+    },
+    {
+      "Team": "Canada",
+      "Year": "2022",
+      "Km": 100,
+      "Final Position": "Group Stage",
+      "Pct": 2.5947067981318113,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Spain",
+      "Year": "2022",
+      "Km": 99,
+      "Final Position": "Round of 16",
+      "Pct": 2.568759730150493,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Senegal",
+      "Year": "2022",
+      "Km": 94,
+      "Final Position": "Round of 16",
+      "Pct": 2.4390243902439024,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Croatia",
+      "Year": "2022",
+      "Km": 83,
+      "Final Position": "3rd Place",
+      "Pct": 2.1536066424494034,
+      "Pos": 3.0
+    },
+    {
+      "Team": "Japan",
+      "Year": "2022",
+      "Km": 74,
+      "Final Position": "Round of 16",
+      "Pct": 1.9200830306175403,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Brazil",
+      "Year": "2022",
+      "Km": 74,
+      "Final Position": "Quarter-finals",
+      "Pct": 1.9200830306175403,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Australia",
+      "Year": "2022",
+      "Km": 73,
+      "Final Position": "Round of 16",
+      "Pct": 1.894135962636222,
+      "Pos": 12.5
+    },
+    {
+      "Team": "South Korea",
+      "Year": "2022",
+      "Km": 68,
+      "Final Position": "Round of 16",
+      "Pct": 1.7644006227296314,
+      "Pos": 12.5
+    },
+    {
+      "Team": "Netherlands",
+      "Year": "2022",
+      "Km": 67,
+      "Final Position": "Quarter-finals",
+      "Pct": 1.7384535547483135,
+      "Pos": 6.5
+    },
+    {
+      "Team": "Mexico",
+      "Year": "2022",
+      "Km": 63,
+      "Final Position": "Group Stage",
+      "Pct": 1.634665282823041,
+      "Pos": 24.5
+    },
+    {
+      "Team": "Iran",
+      "Year": "2022",
+      "Km": 61,
+      "Final Position": "Group Stage",
+      "Pct": 1.5827711468604049,
+      "Pos": 24.5
+    }
+  ],
+  "wc2026": [
+    {
+      "Team": "Bosnia and Herzegovina",
+      "Group": "B",
+      "Km": 5039,
+      "Pct": 5.077436191973237
+    },
+    {
+      "Team": "Algeria",
+      "Group": "J",
+      "Km": 4840,
+      "Pct": 4.876918271313846
+    },
+    {
+      "Team": "Czechia",
+      "Group": "A",
+      "Km": 4526,
+      "Pct": 4.56052316032365
+    },
+    {
+      "Team": "South Africa",
+      "Group": "A",
+      "Km": 3936,
+      "Pct": 3.966022792539524
+    },
+    {
+      "Team": "DR Congo",
+      "Group": "K",
+      "Km": 3658,
+      "Pct": 3.6859022802615797
+    },
+    {
+      "Team": "Ecuador",
+      "Group": "E",
+      "Km": 3424,
+      "Pct": 3.4501173886319436
+    },
+    {
+      "Team": "Canada",
+      "Group": "B",
+      "Km": 3359,
+      "Pct": 3.384621585401489
+    },
+    {
+      "Team": "Austria",
+      "Group": "J",
+      "Km": 3114,
+      "Pct": 3.137752788609776
+    },
+    {
+      "Team": "USA",
+      "Group": "D",
+      "Km": 3090,
+      "Pct": 3.1135697228016084
+    },
+    {
+      "Team": "Belgium",
+      "Group": "G",
+      "Km": 3090,
+      "Pct": 3.1135697228016084
+    },
+    {
+      "Team": "Colombia",
+      "Group": "K",
+      "Km": 2891,
+      "Pct": 2.913051802142217
+    },
+    {
+      "Team": "England",
+      "Group": "L",
+      "Km": 2799,
+      "Pct": 2.820350049877573
+    },
+    {
+      "Team": "Cura\u00e7ao",
+      "Group": "E",
+      "Km": 2705,
+      "Pct": 2.7256330421289157
+    },
+    {
+      "Team": "Germany",
+      "Group": "E",
+      "Km": 2644,
+      "Pct": 2.6641677498664893
+    },
+    {
+      "Team": "Cabo Verde",
+      "Group": "H",
+      "Km": 2533,
+      "Pct": 2.552321070503713
+    },
+    {
+      "Team": "Croatia",
+      "Group": "L",
+      "Km": 2477,
+      "Pct": 2.4958939169513217
+    },
+    {
+      "Team": "Uruguay",
+      "Group": "H",
+      "Km": 2430,
+      "Pct": 2.4485354130769927
+    },
+    {
+      "Team": "Jordan",
+      "Group": "J",
+      "Km": 2383,
+      "Pct": 2.4011769092026642
+    },
+    {
+      "Team": "Spain",
+      "Group": "H",
+      "Km": 2367,
+      "Pct": 2.3850548653305523
+    },
+    {
+      "Team": "Uzbekistan",
+      "Group": "K",
+      "Km": 2338,
+      "Pct": 2.3558336608123494
+    },
+    {
+      "Team": "Switzerland",
+      "Group": "B",
+      "Km": 2299,
+      "Pct": 2.3165361788740766
+    },
+    {
+      "Team": "Saudi Arabia",
+      "Group": "H",
+      "Km": 2104,
+      "Pct": 2.1200487691827132
+    },
+    {
+      "Team": "Scotland",
+      "Group": "C",
+      "Km": 2025,
+      "Pct": 2.0404461775641605
+    },
+    {
+      "Team": "New Zealand",
+      "Group": "G",
+      "Km": 1935,
+      "Pct": 1.9497596807835316
+    },
+    {
+      "Team": "T\u00fcrkiye",
+      "Group": "D",
+      "Km": 1840,
+      "Pct": 1.8540350452928671
+    },
+    {
+      "Team": "Morocco",
+      "Group": "C",
+      "Km": 1812,
+      "Pct": 1.8258214685166714
+    },
+    {
+      "Team": "Brazil",
+      "Group": "C",
+      "Km": 1776,
+      "Pct": 1.7895468698044192
+    },
+    {
+      "Team": "Iran",
+      "Group": "G",
+      "Km": 1740,
+      "Pct": 1.7532722710921675
+    },
+    {
+      "Team": "Japan",
+      "Group": "F",
+      "Km": 1718,
+      "Pct": 1.731104460768014
+    },
+    {
+      "Team": "Tunisia",
+      "Group": "F",
+      "Km": 1585,
+      "Pct": 1.5970899710810837
+    },
+    {
+      "Team": "Portugal",
+      "Group": "K",
+      "Km": 1557,
+      "Pct": 1.568876394304888
+    },
+    {
+      "Team": "Haiti",
+      "Group": "C",
+      "Km": 1507,
+      "Pct": 1.5184950072045382
+    },
+    {
+      "Team": "Qatar",
+      "Group": "B",
+      "Km": 1476,
+      "Pct": 1.4872585472023216
+    },
+    {
+      "Team": "Netherlands",
+      "Group": "F",
+      "Km": 1403,
+      "Pct": 1.413701722035811
+    },
+    {
+      "Team": "Australia",
+      "Group": "D",
+      "Km": 1288,
+      "Pct": 1.297824531705007
+    },
+    {
+      "Team": "Ghana",
+      "Group": "L",
+      "Km": 1128,
+      "Pct": 1.136604092983888
+    },
+    {
+      "Team": "Ivory Coast",
+      "Group": "E",
+      "Km": 1080,
+      "Pct": 1.0882379613675524
+    },
+    {
+      "Team": "Sweden",
+      "Group": "F",
+      "Km": 1027,
+      "Pct": 1.0348336910411817
+    },
+    {
+      "Team": "Iraq",
+      "Group": "I",
+      "Km": 976,
+      "Pct": 0.983444676198825
+    },
+    {
+      "Team": "Mexico",
+      "Group": "A",
+      "Km": 922,
+      "Pct": 0.9290327781304475
+    },
+    {
+      "Team": "Argentina",
+      "Group": "J",
+      "Km": 731,
+      "Pct": 0.7365758794071119
+    },
+    {
+      "Team": "Korea Republic",
+      "Group": "A",
+      "Km": 639,
+      "Pct": 0.6438741271424685
+    },
+    {
+      "Team": "Norway",
+      "Group": "I",
+      "Km": 612,
+      "Pct": 0.6166681781082797
+    },
+    {
+      "Team": "France",
+      "Group": "I",
+      "Km": 566,
+      "Pct": 0.570317301975958
+    },
+    {
+      "Team": "Paraguay",
+      "Group": "D",
+      "Km": 559,
+      "Pct": 0.563263907781909
+    },
+    {
+      "Team": "Panama",
+      "Group": "L",
+      "Km": 550,
+      "Pct": 0.5541952581038462
+    },
+    {
+      "Team": "Senegal",
+      "Group": "I",
+      "Km": 550,
+      "Pct": 0.5541952581038462
+    },
+    {
+      "Team": "Egypt",
+      "Group": "G",
+      "Km": 195,
+      "Pct": 0.1964874096913636
+    }
+  ],
+  "totals": {
+    "2014": 91216,
+    "2018": 270268,
+    "2022": 3854
+  },
+  "total2026": 99243.0
+}
