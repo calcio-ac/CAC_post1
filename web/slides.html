@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CAC_PIPELINE // Post 01 — Slides</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg" />
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  :root {
+    --teamA: #0277B6;
+    --teamB: #D90429;
+    --box:   #09D69F;
+    --bg:    #FFD166;
+    --white: #FFFFFF;
+    --black: #000000;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #111;
+    color: var(--white);
+    font-family: 'Courier New', ui-monospace, monospace;
+  }
+  /* Toolbar */
+  .toolbar {
+    position: sticky; top: 0; z-index: 50;
+    background: #000; padding: 10px 16px;
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    border-bottom: 2px solid var(--box);
+  }
+  .toolbar h1 { margin: 0; font-size: 14px; letter-spacing: 1px; flex: 1; }
+  .toolbar button, .toolbar select {
+    background: var(--box); color: var(--black);
+    border: 2px solid var(--black);
+    padding: 6px 12px; font-family: inherit; font-size: 12px;
+    cursor: pointer; font-weight: bold;
+  }
+  .toolbar button:hover { background: var(--bg); }
+  .toolbar .alt { background: var(--bg); }
+  .toolbar label { font-size: 11px; }
+
+  /* Slide deck container */
+  .deck { padding: 30px; display: flex; flex-direction: column; gap: 30px; align-items: center; }
+  .slide-wrap {
+    position: relative;
+    display: inline-block;
+    transform-origin: top center;
+  }
+  .slide-wrap .meta-row {
+    display:flex; justify-content: space-between; align-items:center;
+    background:#000; color: var(--white); padding: 6px 10px;
+    font-size: 12px; border: 2px solid var(--box);
+  }
+  .slide-wrap .meta-row button {
+    background: var(--box); color: var(--black); border: 1px solid var(--black);
+    padding: 4px 10px; cursor: pointer; font-family: inherit; font-weight: bold;
+    font-size: 11px;
+  }
+
+  /* THE SLIDE — 1080 x 1350 exactly */
+  .slide {
+    width: 1080px;
+    height: 1350px;
+    background: var(--bg);
+    color: var(--black);
+    position: relative;
+    overflow: hidden;
+    padding: 80px;
+    border: 4px solid var(--black);
+  }
+  .slide .corner-tl { position:absolute; top: 30px; left: 30px; display:flex; gap:10px; align-items:center; }
+  .slide .corner-tl img { height: 56px; }
+  .slide .corner-tl .tag {
+    background: var(--black); color: var(--bg); padding: 4px 10px; font-size: 14px; letter-spacing: 1px;
+  }
+  .slide .corner-tr { position:absolute; top: 30px; right: 30px; text-align:right; font-size: 14px; letter-spacing: 1px; }
+  .slide .corner-br { position:absolute; bottom: 30px; right: 30px; font-size: 14px; letter-spacing: 1px; }
+  .slide .corner-bl { position:absolute; bottom: 30px; left: 30px; font-size: 14px; letter-spacing: 1px; }
+  .slide .swipe {
+    position:absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    background: var(--black); color: var(--bg); padding: 8px 18px; font-size: 16px; letter-spacing: 2px;
+  }
+
+  .slide h2 {
+    font-size: 64px; line-height: 1.05; margin: 0 0 24px;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .slide h3 {
+    font-size: 36px; line-height: 1.1; margin: 0 0 16px;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .slide p { font-size: 26px; line-height: 1.35; margin: 0 0 18px; }
+  .slide .tiny { font-size: 18px; opacity: .8; }
+
+  .big-num {
+    font-size: 360px; line-height: 0.9; font-weight: bold;
+    letter-spacing: -6px;
+  }
+  .big-num.red { color: var(--teamB); }
+  .big-num.blue { color: var(--teamA); }
+  .big-num.green { color: var(--box); -webkit-text-stroke: 4px var(--black); }
+
+  .box {
+    background: var(--box); border: 4px solid var(--black);
+    padding: 24px 28px;
+  }
+  .box.red { background: var(--teamB); color: var(--white); }
+  .box.blue { background: var(--teamA); color: var(--white); }
+  .box.white { background: var(--white); }
+
+  table.t {
+    width: 100%; border-collapse: collapse; font-size: 24px;
+    background: var(--white); border: 4px solid var(--black);
+  }
+  table.t th { background: var(--black); color: var(--bg); padding: 14px 16px; text-align: left; font-size: 18px; letter-spacing: 1px; }
+  table.t td { padding: 14px 16px; border-bottom: 2px dashed var(--black); }
+  table.t tr:last-child td { border-bottom: 0; }
+  table.t td.right { text-align: right; font-weight: bold; }
+
+  /* Slide 4 sweet-spot visual */
+  .axis {
+    position: relative; height: 120px;
+    background: var(--white); border: 4px solid var(--black);
+    margin: 20px 0;
+  }
+  .axis .band {
+    position: absolute; top: 0; bottom: 0;
+    background: var(--box);
+    border-left: 4px solid var(--teamA);
+    border-right: 4px solid var(--teamB);
+  }
+  .axis .label {
+    position: absolute; top: -28px; font-size: 18px; font-weight: bold;
+  }
+  .axis .scale {
+    position:absolute; bottom: -32px; left: 0; right: 0;
+    display: flex; justify-content: space-between; font-size: 16px;
+  }
+
+  .center { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 24px; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h1>CAC_PIPELINE // POST 01 — SLIDES (1080×1350)</h1>
+  <label>VIEW SCALE</label>
+  <select id="scaleSel">
+    <option value="0.35">35% (preview)</option>
+    <option value="0.5" selected>50%</option>
+    <option value="0.75">75%</option>
+    <option value="1">100% (true size)</option>
+  </select>
+  <label>EXPORT @</label>
+  <select id="dpiSel">
+    <option value="2" selected>2x HD (2160×2700)</option>
+    <option value="3">3x Ultra (3240×4050)</option>
+    <option value="1">1x (1080×1350)</option>
+  </select>
+  <button id="dlAll">⬇ DOWNLOAD ALL (ZIP-style sequential)</button>
+</div>
+
+<div class="deck" id="deck"></div>
+
+<script>
+const COL = { teamA:'#0277B6', teamB:'#D90429', box:'#09D69F', bg:'#FFD166', white:'#FFFFFF', black:'#000000' };
+const SEMI = ['1st Place','2nd Place','3rd Place','4th Place'];
+let DATA = null;
+
+async function load() {
+  const res = await fetch('../data/data.json');
+  DATA = await res.json();
+  render();
+  document.getElementById('scaleSel').addEventListener('change', applyScale);
+  document.getElementById('dlAll').addEventListener('click', downloadAll);
+  applyScale();
+}
+
+function applyScale() {
+  const s = parseFloat(document.getElementById('scaleSel').value);
+  document.querySelectorAll('.slide-wrap').forEach(w => {
+    w.style.transform = `scale(${s})`;
+    w.style.marginBottom = `${(1350 + 50) * (s - 1)}px`; // collapse vertical gap
+  });
+}
+
+function fmtKm(n){ return Math.round(n).toLocaleString() + ' km'; }
+
+// ---- compute the slide content from data ----
+function compute(thr=3.5, floor=1.8) {
+  const h = DATA.historical;
+  const above = h.filter(r => r.Pct > thr);
+  const aboveGS = above.filter(r => r['Final Position']==='Group Stage');
+  const belowFloor = h.filter(r => r.Pct < floor);
+  const belowFloorSemi = belowFloor.filter(r => SEMI.includes(r['Final Position']));
+  const sweet = h.filter(r => r.Pct >= floor && r.Pct <= thr && SEMI.includes(r['Final Position']))
+                 .sort((a,b)=>a.Pos - b.Pos || a.Pct - b.Pct);
+  const sweetTotal = h.filter(r => r.Pct >= floor && r.Pct <= thr).length;
+  const danger26 = DATA.wc2026.filter(r => r.Pct > thr).sort((a,b)=>b.Pct-a.Pct);
+  const sweet26 = DATA.wc2026.filter(r => r.Pct >= floor && r.Pct <= thr).sort((a,b)=>a.Pct-b.Pct);
+  return { thr, floor, above, aboveGS, belowFloor, belowFloorSemi, sweet, sweetTotal, danger26, sweet26 };
+}
+
+// ---- slides ----
+function slideShell(n, body) {
+  return `
+    <div class="slide-wrap">
+      <div class="meta-row">
+        <span>SLIDE ${n} / 9 — 1080×1350</span>
+        <button onclick="downloadOne(${n})">⬇ DOWNLOAD HD</button>
+      </div>
+      <div class="slide" id="slide-${n}">
+        <div class="corner-tl">
+          <img src="logo.svg" alt="CAC" />
+          <span class="tag">POST_01</span>
+        </div>
+        <div class="corner-tr">CALCIOAC.COM</div>
+        ${body}
+      </div>
+    </div>
+  `;
+}
+
+function render() {
+  const C = compute();
+  const hitRate = C.sweetTotal ? Math.round(C.sweet.length/C.sweetTotal*100) : 0;
+  const exitRate = C.above.length ? Math.round(C.aboveGS.length/C.above.length*100) : 0;
+
+  const slides = [];
+
+  // 1 — COVER
+  slides.push(slideShell(1, `
+    <div class="center">
+      <h2 style="font-size:84px;">DOES FLYING MORE = LOSING MORE?</h2>
+      <p style="font-size:34px;">A travel-fatigue read of three World Cups.<br>And a preview of 2026.</p>
+      <div class="box" style="margin-top:30px;"><b style="font-size:30px;">CAC_PIPELINE // POST 01</b></div>
+    </div>
+    <div class="swipe">SWIPE →</div>
+  `));
+
+  // 2 — HEADLINE NUMBER
+  slides.push(slideShell(2, `
+    <div class="center">
+      <p class="tiny" style="font-size:24px;">Teams that carried more than 3.5% of their tournament's total group-stage travel</p>
+      <div class="big-num red">${exitRate}%</div>
+      <h3>crashed out in the group stage.</h3>
+      <p class="tiny">Sample: ${C.aboveGS.length}/${C.above.length} teams · 2014 + 2018 + 2022</p>
+    </div>
+  `));
+
+  // 3 — FLOOR
+  slides.push(slideShell(3, `
+    <div class="center">
+      <p class="tiny" style="font-size:24px;">Teams that traveled less than 1.8% of the tournament total</p>
+      <div class="big-num blue">${C.belowFloorSemi.length} / ${C.belowFloor.length}</div>
+      <h3>have ever reached the semi-finals.</h3>
+      <div class="box blue" style="margin-top:20px;"><b style="font-size:30px;">"TOO RESTED" IS A THING TOO.</b></div>
+    </div>
+  `));
+
+  // 4 — SWEET SPOT
+  slides.push(slideShell(4, `
+    <h2>THE SWEET SPOT</h2>
+    <p>Every World Cup winner since 2014 sat between <b>1.8%</b> and <b>3.5%</b> of total tournament travel.</p>
+    <div class="axis" style="margin-top:60px;">
+      <div class="band" style="left:22.5%; right:56.25%;"></div>
+      <div class="label" style="left:22%; color:var(--teamA);">1.8% FLOOR</div>
+      <div class="label" style="right:55%; color:var(--teamB);">3.5% DANGER</div>
+      <div class="scale"><span>0%</span><span>2%</span><span>4%</span><span>6%</span><span>8%</span></div>
+    </div>
+    <div class="box" style="margin-top:80px;"><h3 style="margin:0;">NOT TOO TIRED. NOT TOO RESTED.</h3></div>
+    <p class="tiny" style="margin-top:30px;">Historical hit rate inside the band: ${C.sweet.length}/${C.sweetTotal} reached the semis (${hitRate}%).</p>
+  `));
+
+  // 5 — RECEIPTS (sweet-spot semi-finalists)
+  const top = C.sweet.slice(0, 7);
+  slides.push(slideShell(5, `
+    <h2>THE RECEIPTS</h2>
+    <p>Semi-finalists that landed inside the sweet spot:</p>
+    <table class="t" style="margin-top:30px;">
+      <thead><tr><th>TEAM</th><th>YEAR</th><th>TRAVEL</th><th>RESULT</th></tr></thead>
+      <tbody>
+        ${top.map(r => `<tr>
+          <td><b>${r.Team}</b></td>
+          <td>${r.Year}</td>
+          <td>${r.Pct.toFixed(2)}%</td>
+          <td>${r['Final Position']}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <p class="tiny" style="margin-top:24px;">${C.sweet.length} total semi-finalists across 2014/18/22.</p>
+  `));
+
+  // 6 — IRONMEN
+  const ironmen = DATA.historical.slice().sort((a,b)=>b.Pct-a.Pct).slice(0,5);
+  slides.push(slideShell(6, `
+    <h2>THE IRONMEN</h2>
+    <p>Most-travelled teams in WC history. Almost all died early.</p>
+    <table class="t" style="margin-top:30px;">
+      <thead><tr><th>TEAM</th><th>YEAR</th><th>TRAVEL %</th><th>KM</th><th>RESULT</th></tr></thead>
+      <tbody>
+        ${ironmen.map(r => `<tr>
+          <td><b>${r.Team}</b></td>
+          <td>${r.Year}</td>
+          <td>${r.Pct.toFixed(2)}%</td>
+          <td>${fmtKm(r.Km)}</td>
+          <td>${r['Final Position']}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <p class="tiny" style="margin-top:24px;">Brazil 2014 is the only top-5 traveler that reached a semi — home advantage.</p>
+  `));
+
+  // 7 — 2026 DANGER
+  const dz = C.danger26.slice(0,6);
+  slides.push(slideShell(7, `
+    <h2>2026 // DANGER ZONE</h2>
+    <p>Teams projected to carry more than 3.5% of total travel.</p>
+    <table class="t" style="margin-top:30px;">
+      <thead><tr><th>TEAM</th><th>GROUP</th><th>TRAVEL %</th><th>KM</th></tr></thead>
+      <tbody>
+        ${dz.map(r => `<tr>
+          <td><b>${r.Team}</b></td>
+          <td>${r.Group}</td>
+          <td>${r.Pct.toFixed(2)}%</td>
+          <td>${fmtKm(r.Km)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <div class="box red" style="margin-top:40px;"><b style="font-size:30px;">HISTORICAL EXIT RATE AT THIS BAND: ${exitRate}%</b></div>
+  `));
+
+  // 8 — 2026 SWEET SPOT
+  const sc = C.sweet26.slice(0, 10);
+  slides.push(slideShell(8, `
+    <h2>2026 // SEMI CONTENDERS</h2>
+    <p>2026 teams sitting where the last three champions sat.</p>
+    <table class="t" style="margin-top:30px; font-size:22px;">
+      <thead><tr><th>TEAM</th><th>GROUP</th><th>TRAVEL %</th><th>KM</th></tr></thead>
+      <tbody>
+        ${sc.map(r => `<tr>
+          <td><b>${r.Team}</b></td>
+          <td>${r.Group}</td>
+          <td>${r.Pct.toFixed(2)}%</td>
+          <td>${fmtKm(r.Km)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <p class="tiny" style="margin-top:24px;">Base rate inside this band: ${hitRate}%. Not a prediction — a position.</p>
+  `));
+
+  // 9 — CTA
+  slides.push(slideShell(9, `
+    <div class="center">
+      <h2 style="font-size:74px;">EXPLORE THE TOOL</h2>
+      <p style="font-size:32px;">Drag the sliders. Find your country.<br>See the sweet spot live.</p>
+      <div class="box" style="margin-top:30px; font-size:32px;"><b>CALCIO-AC.GITHUB.IO/CAC_POST1</b></div>
+      <p style="font-size:24px; margin-top:30px;">link in bio · CALCIOAC.COM</p>
+    </div>
+    <div class="corner-bl">FOLLOW @CALCIO.AC</div>
+  `));
+
+  document.getElementById('deck').innerHTML = slides.join('');
+}
+
+// ---- export ----
+async function downloadOne(n) {
+  const node = document.getElementById('slide-' + n);
+  const dpi = parseFloat(document.getElementById('dpiSel').value);
+  // Temporarily clear scale on the wrapper so html2canvas captures full size
+  const wrap = node.closest('.slide-wrap');
+  const prevTransform = wrap.style.transform;
+  const prevMargin = wrap.style.marginBottom;
+  wrap.style.transform = 'none';
+  wrap.style.marginBottom = '';
+  const canvas = await html2canvas(node, {
+    scale: dpi, backgroundColor: COL.bg, useCORS: true, logging: false,
+    width: 1080, height: 1350, windowWidth: 1080, windowHeight: 1350
+  });
+  wrap.style.transform = prevTransform;
+  wrap.style.marginBottom = prevMargin;
+  const a = document.createElement('a');
+  a.download = `CAC_post01_slide${String(n).padStart(2,'0')}_${dpi}x.png`;
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+}
+
+async function downloadAll() {
+  const btn = document.getElementById('dlAll');
+  btn.disabled = true;
+  const orig = btn.textContent;
+  for (let n = 1; n <= 9; n++) {
+    btn.textContent = `EXPORTING ${n} / 9…`;
+    await downloadOne(n);
+    await new Promise(r => setTimeout(r, 300));
+  }
+  btn.disabled = false;
+  btn.textContent = orig;
+}
+
+load();
+</script>
+</body>
+</html>
